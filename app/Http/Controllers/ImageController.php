@@ -11,7 +11,7 @@ class ImageController extends Controller
     public function index()
     {
         # code...
-        $images = Image::published()->latest()->paginate(15);
+        $images = Image::latest()->paginate(15);
         return view('images.index', compact('images'));
     }
     public function show(Image $image)
@@ -26,7 +26,7 @@ class ImageController extends Controller
 
     public function store(ImageRequest $request)
     {
-        # code...
-        dd($request);
+        Image::create($request->getData());
+        return to_route('images.index')->with('message', 'Image has been uploaded successfully!');
     }
 }

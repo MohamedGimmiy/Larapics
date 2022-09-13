@@ -3,9 +3,8 @@
 
 @foreach ($images as $image)
     <div>
-        <a href="">
-            <img src="{{$image->fileUrl()}}" alt="{{$image->title}}" width="300">
-            
+        <a href="{{$image->permalink()}}">
+            <img src="{{$image->fileUrl()}}" alt="{{$image->title}}" width="300" style="margin-top: 20px;">
         </a>
     </div>
 

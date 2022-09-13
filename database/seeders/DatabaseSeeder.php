@@ -21,15 +21,10 @@ class DatabaseSeeder extends Seeder
         foreach($images as $image){
             Image::factory()->create([
                 'file' => $image,
-                'dimension' => $this->getDimension($image)
+                'dimension' => Image::getDimension($image)
             ]);
         }
     }
 
-    protected function getDimension($image)
-    {
-        # code...
-        [$width, $height] = getimagesize(Storage::path($image));
-        return $width . 'x'. $height;
-    }
+
 }

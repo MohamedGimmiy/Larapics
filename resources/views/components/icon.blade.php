@@ -1,3 +1,1 @@
-<div>
-    ICON
-</div>
+<img src="{{$src}}" alt="">

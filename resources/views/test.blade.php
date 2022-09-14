@@ -14,6 +14,6 @@
     @endphp
     <x-icon :src="$icon" />
     <x-ui.button />
-    <x-alert type="danger"/>
+    <x-alert type="danger" id="my-alert" class="mt-4" role="flash"/>
 </body>
 </html>

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class Image extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','file','dimension','user_id'];
+    protected $fillable = ['title','file','dimension','user_id', 'slug'];
     public static function makeDirectory()
     {
         # code...

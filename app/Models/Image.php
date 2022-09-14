@@ -47,5 +47,33 @@ class Image extends Model
         return route("images.{$method}", $this->$key);
     }
 
+    public  function getSlug()
+    {
+        # code...
+        $slug = str($this->title)->slug();
+        $numSlugFound = static::where('slug', 'regexp', "^". $slug. "(-[0-9])?")->count();
+        if($numSlugFound > 0){
+            return $slug . "-". $numSlugFound + 1;
+        }
+        return $slug;
+    }
+
+    protected static function booted()
+    {   // elqoent events in laravel php
+        static::creating(function ($image){
+            if($image->title){
+                $image->slug = $image->getSlug();
+                $image->is_published = true;
+
+            }
+        });
+
+        static::updating(function ($image){
+            if($image->title && !$image->slug){
+                $image->slug = $image->getSlug();
+                $image->is_published = true;
+            }
+        });
+    }
 
 }

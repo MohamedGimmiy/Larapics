@@ -7,9 +7,14 @@
 @endif
 @foreach ($images as $image)
     <div>
-        <a href="{{$image->permalink()}}">
-            <img src="{{$image->fileUrl()}}" alt="{{$image->title}}" width="300" style="margin-top: 20px;">
-        </a>
+        <div>
+            <a href="{{$image->permalink()}}">
+                <img src="{{$image->fileUrl()}}" alt="{{$image->title}}" width="300" style="margin-top: 20px;">
+            </a>
+        </div>
+        <div>
+            <a href="{{$image->route('edit')}}">Edit</a>
+        </div>
     </div>
 
 @endforeach

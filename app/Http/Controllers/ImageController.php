@@ -10,7 +10,6 @@ class ImageController extends Controller
 {
     public function index()
     {
-        # code...
         $images = Image::latest()->paginate(15);
         return view('images.index', compact('images'));
     }
@@ -20,7 +19,6 @@ class ImageController extends Controller
     }
     public function create()
     {
-        # code...
         return view('images.create');
     }
 
@@ -28,5 +26,16 @@ class ImageController extends Controller
     {
         Image::create($request->getData());
         return to_route('images.index')->with('message', 'Image has been uploaded successfully!');
+    }
+
+    public function edit(Image $image)
+    {
+        return view('images.edit', compact('image'));
+    }
+
+    public function update(Image $image, ImageRequest $request)
+    {
+        $image->update($request->getData());
+        return to_route('images.index')->with('message', 'Image has been updated successfully!');
     }
 }

@@ -14,6 +14,11 @@
     @endphp
     <x-icon :src="$icon" />
     <x-ui.button />
-    <x-alert type="danger" dismissible id="my-alert" class="mt-4" role="flash"/>
+    <x-alert type="success" dismissible id="my-alert" class="mt-4" role="flash">
+        <x-slot:title>
+            Success
+        </x-slot>
+        <p class="mb-0">Data has been set</p>
+    </x-alert>
 </body>
 </html>

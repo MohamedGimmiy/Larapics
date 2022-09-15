@@ -15,6 +15,7 @@ class Alert extends Component
         'info',
         'warning'
     ];
+    protected $classes = ['alert'];
     /**
      * Create a new component instance.
      *
@@ -22,12 +23,16 @@ class Alert extends Component
      */
     public function __construct($type = 'info', $dismissible = false)
     {
+        $this->type = $this->validType($type);
+        $this->classes [] = "alert-{$this->type}";
+        if($dismissible){
+            $this->classes[]= 'alert-dismissible fade show';
+        }
         $this->dismissible = $dismissible;
-        $this->type = $type;
     }
-    public function validType()
+    protected function validType($type)
     {
-        return in_array($this->type, $this->types) ? $this->type : 'info';
+        return in_array($type, $this->types) ? $type : 'info';
     }
     /**
      * Get the view / contents that represent the component.
@@ -44,11 +49,16 @@ class Alert extends Component
         return new HtmlString("<a href='{$target}' class='alert-link'>{$text}</a>") ;
     }
 
-public function icon($url = null)
-{   // if not null
-    $icon = $url ?? asset("icons/icon-{$this->type}.svg");
-    return new HtmlString("<img src='{$icon}' alt='' class='me-2'/>");
+    public function icon($url = null)
+    {   // if not null
+        $this->classes[] = 'd-flex align-items-center';
+        $icon = $url ?? asset("icons/icon-{$this->type}.svg");
+        return new HtmlString("<img src='{$icon}' alt='' class='me-2'/>");
 
-}
+    }
+    public function getClasses()
+    {
+        return join(" ",$this->classes);
+    }
 
 }

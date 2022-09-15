@@ -12,6 +12,18 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
+    public function getImagesCount()
+    {
+         $imagesCount = $this->images()->published()->count();
+         return $imagesCount .' '. str()->plural('image', $imagesCount);
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -25,6 +25,7 @@
             </div>
             @endforeach
         </div>
-        {{$images->links()}}
+
     </div>
+    {{$images->links()}}
 </x-layout>

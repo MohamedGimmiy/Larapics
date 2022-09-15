@@ -20,6 +20,10 @@
         </x-slot> --}}
         {{$component->icon()}}
         <p class="mb-0">Data has been removed {{$component->link('Undo')}} </p>
+        <x-form action="/images" method="get">
+            <input name="name" type="text"/>
+            <button type="submit">Submit</button>
+        </x-form>
     </x-alert>
 </body>
 </html>

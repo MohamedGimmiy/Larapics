@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\HtmlString;
 use Illuminate\View\Component;
 
 class Alert extends Component
@@ -37,4 +38,17 @@ class Alert extends Component
     {
         return view('components.alert');
     }
+
+    public function link($text, $target = '#')
+    {
+        return new HtmlString("<a href='{$target}' class='alert-link'>{$text}</a>") ;
+    }
+
+public function icon($url = null)
+{   // if not null
+    $icon = $url ?? asset("icons/icon-{$this->type}.svg");
+    return new HtmlString("<img src='{$icon}' alt='' class='me-2'/>");
+
+}
+
 }

@@ -3,7 +3,12 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+
+use App\Enums\Role;
+use App\Models\Image;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -23,8 +28,15 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
 
+        $this->registerPolicies();
+        // Authorization Gates
+        Gate::define('update-image',function(User $user, Image $image){
+            return $user->id === $image->user_id || $user->role == Role::Editor;
+        });
+        Gate::define('delete-image',function(User $user, Image $image){
+            return $user->id === $image->user_id;
+        });
         //
     }
 }

@@ -37,6 +37,11 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-image',function(User $user, Image $image){
             return $user->id === $image->user_id;
         });
-        //
+        // for admin access (grant all permissions)
+        Gate::before(function($user, $ability){
+            if($user->role === Role::Admin){
+                return true;
+            }
+        });
     }
 }

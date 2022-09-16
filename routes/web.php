@@ -25,3 +25,7 @@ Route::put('/images/{image}', [ImageController::class, 'update'])->name('images.
 Route::delete('/images/{image}', [ImageController::class, 'destroy'])->name('images.destroy');
 
 Route::view('/test-blade','test');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

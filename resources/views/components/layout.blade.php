@@ -72,7 +72,7 @@
         </div>
     </nav>
     {{$slot}}
-    <footer class="bg-light text-muted py-3 mt-5 border-top">
+    <footer  class="bg-light text-muted py-3 mt-5 border-top ">
         <div class="container-fluid">
             <p class="float-end mb-1">
                 <a href="#" class="text-decoration-none">Back to top</a>

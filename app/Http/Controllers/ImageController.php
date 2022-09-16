@@ -11,7 +11,7 @@ class ImageController extends Controller
 {
     public function index()
     {
-        $images = Image::published()->latest()->paginate(3)->withQueryString();
+        $images = Image::published()->latest()->paginate(10)->withQueryString();
         return view('images.index', compact('images'));
     }
     public function show(Image $image)
@@ -31,18 +31,19 @@ class ImageController extends Controller
 
     public function edit(Image $image)
     {
-        $this->authorize('update-image', $image);
+        $this->authorize('update', $image);
         return view('images.edit', compact('image'));
     }
 
     public function update(Image $image, ImageRequest $request)
     {
+        $this->authorize('update', $image);
         $image->update($request->getData());
         return to_route('images.index')->with('message', 'Image has been updated successfully!');
     }
     public function destroy(Image $image)
     {
-        if(Gate::denies('delete-image', $image)){
+        if(Gate::denies('delete', $image)){
             abort(403, "Access denied");
         }
         $image->delete();

@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Gate;
 
 class ImageController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Image::class);
+    }
     public function index()
     {
-        $images = Image::published()->latest()->paginate(10)->withQueryString();
+        $images = Image::visibleFor(request()->user())->latest()->paginate(10)->withQueryString();
         return view('images.index', compact('images'));
     }
     public function show(Image $image)

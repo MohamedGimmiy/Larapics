@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\Return_;
 
 class Image extends Model
 {
@@ -39,6 +41,12 @@ class Image extends Model
     {
         # code...
         return $query->where('is_published', true);
+    }
+    public function ScopeVisibleFor($query, User $user)
+    {
+        if($user->role === Role::Admin || Role::Editor)
+            return;
+        return $query->where('user_id',$user->id);
     }
 
     // return actual url of an image

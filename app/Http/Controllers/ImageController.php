@@ -11,16 +11,13 @@ class ImageController extends Controller
 {
     public function __construct()
     {
+        $this->middleware(['auth']);
         $this->authorizeResource(Image::class);
     }
     public function index()
     {
         $images = Image::visibleFor(request()->user())->latest()->paginate(10)->withQueryString();
         return view('images.index', compact('images'));
-    }
-    public function show(Image $image)
-    {
-        return view('images.show', compact('image'));
     }
     public function create()
     {

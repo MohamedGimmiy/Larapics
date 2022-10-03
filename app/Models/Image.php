@@ -42,11 +42,11 @@ class Image extends Model
         # code...
         return $query->where('is_published', true);
     }
-    public function ScopeVisibleFor($query, User $user)
+    public function scopeVisibleFor($query, User $user)
     {
-        if($user->role === Role::Admin || Role::Editor)
+        if($user->role === Role::Admin || $user->role === Role::Editor)
             return;
-        return $query->where('user_id',$user->id);
+        return $query->where("user_id", $user->id);
     }
 
     // return actual url of an image

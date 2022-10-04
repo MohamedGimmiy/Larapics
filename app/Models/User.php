@@ -26,6 +26,24 @@ class User extends Authenticatable
     {
         return $this->hasOne(Social::class)->withDefault(); //, "id_user", "_id");
     }
+    public function setting()
+    {
+        return $this->hasOne(Setting::class)->withDefault();
+    }
+
+    // register an event after models initalization
+    protected static function booted(){
+        
+        static::created(function ($user) {
+            $user->setting()->create([
+                'email_notification' => [
+                    'new_comment' => 1,
+                    'new_image' => 1
+                ]
+            ]);
+        });
+    }
+
     public function updateSettings($data)
     {
         $this->updateSocialProfile($data['social']);

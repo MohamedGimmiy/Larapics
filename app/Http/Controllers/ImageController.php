@@ -14,11 +14,13 @@ class ImageController extends Controller
         $this->middleware(['auth']);
         $this->authorizeResource(Image::class);
     }
+
     public function index()
     {
         $images = Image::visibleFor(request()->user())->latest()->paginate(10)->withQueryString();
         return view('images.index', compact('images'));
     }
+
     public function create()
     {
         return view('images.create');
@@ -42,6 +44,7 @@ class ImageController extends Controller
         $image->update($request->getData());
         return to_route('images.index')->with('message', 'Image has been updated successfully!');
     }
+
     public function destroy(Image $image)
     {
         if(Gate::denies('delete', $image)){
@@ -50,4 +53,5 @@ class ImageController extends Controller
         $image->delete();
         return to_route('images.index')->with('message', 'Image has been removed successfully!');
     }
+
 }

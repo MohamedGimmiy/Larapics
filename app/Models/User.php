@@ -27,7 +27,7 @@ class User extends Authenticatable
         return $this->hasOne(Social::class)->withDefault(); //, "id_user", "_id");
     }
     // get the latest results
-    public function recentSocial()
+/*     public function recentSocial()
     {
         return $this->hasOne(Social::class)->latestOfMany();
     }
@@ -36,11 +36,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Social::class)->oldestOfMany();
     }
+
     // list by priority column
     public function socialPriority()
     {
         return $this->hasOne(Social::class)->ofMany('priority','min');
-    }
+    } */
 
     public function getImagesCount()
     {

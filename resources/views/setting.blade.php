@@ -1,7 +1,7 @@
 <x-layout title="Setting">
     <div class="container py-4">
 
-        <form action="">
+        <x-form action="{{route('settings.update')}}" method="PUT">
             <div class="row gx-5">
                 <div class="col-md-6">
                     <fieldset>
@@ -74,23 +74,41 @@
                         <legend>Online Profiles</legend>
                         <div class="mb-3">
                             <label class="form-label" for="facebook">Facebook</label>
-                            <input type="text" name="social[facebook]" id="facebook" class="form-control"
-                                placeholder="https://www.facebook.com/...">
+                            <input type="text" name="social[facebook]" id="facebook" class="form-control @error('social.facebook')is-invalid @enderror"
+                                placeholder="https://www.facebook.com/..."
+                                value="{{old('social.facebook',$user->social->facebook)}}"
+                                >
+                                @error('social.facebook')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="twitter">Twitter</label>
-                            <input type="text" name="social[twitter]" id="twitter" class="form-control"
-                                placeholder="https://twitter.com/...">
+                            <input type="text" name="social[twitter]" id="twitter" class="form-control @error('social.twitter')is-invalid @enderror"
+                                placeholder="https://twitter.com/..."
+                                value="{{old('social.twitter',$user->social->twitter)}}">
+
+                                @error('social.twitter')
+                                <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="instagram">Instagram</label>
-                            <input type="text" name="social[instagram]" id="instagram" class="form-control"
-                                placeholder="https://www.instagram.com/...">
+                            <input type="text" name="social[instagram]" id="instagram" class="form-control @error('social.instagram')is-invalid @enderror"
+                                placeholder="https://www.instagram.com/..."
+                                value="{{old('social.instagram',$user->social->instagram)}}">
+                                @error('social.instagram')
+                                <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="website">Website</label>
-                            <input type="text" name="social[website]" id="website" class="form-control"
-                                placeholder="https://...">
+                            <input type="text" name="social[website]" id="website" class="form-control @error('social.website')is-invalid @enderror"
+                                placeholder="https://..."
+                                value="{{old('social.website',$user->social->website)}}">
+                                @error('social.website')
+                                <div class="invalid-feedback">{{$message}}</div>
+                            @enderror
                         </div>
                     </fieldset>
                     <fieldset class="mt-3">
@@ -151,6 +169,6 @@
             <div class="d-flex justify-content-center py-3">
                 <button class="btn btn-lg btn-success">Save changes</button>
             </div>
-        </form>
+        </x-form>
     </div>
 </x-layout>

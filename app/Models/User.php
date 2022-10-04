@@ -21,6 +21,27 @@ class User extends Authenticatable
     {
         return $this->hasMany(Image::class);
     }
+
+    public function social()
+    {
+        return $this->hasOne(Social::class)->withDefault(); //, "id_user", "_id");
+    }
+    // get the latest results
+    public function recentSocial()
+    {
+        return $this->hasOne(Social::class)->latestOfMany();
+    }
+
+    public function oldestSocial()
+    {
+        return $this->hasOne(Social::class)->oldestOfMany();
+    }
+    // list by priority column
+    public function socialPriority()
+    {
+        return $this->hasOne(Social::class)->ofMany('priority','min');
+    }
+
     public function getImagesCount()
     {
          $imagesCount = $this->images()->published()->count();

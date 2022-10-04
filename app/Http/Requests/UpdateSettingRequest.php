@@ -38,4 +38,8 @@ class UpdateSettingRequest extends FormRequest
             'social.instagram' => 'instagram',
         ];
     }
+    public function getData()
+    {
+        return $this->validated();
+    }
 }

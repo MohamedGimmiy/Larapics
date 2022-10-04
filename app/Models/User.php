@@ -26,6 +26,24 @@ class User extends Authenticatable
     {
         return $this->hasOne(Social::class)->withDefault(); //, "id_user", "_id");
     }
+    public function updateSettings($data)
+    {
+        $this->updateSocialProfile($data['social']);
+    }
+    public function updateSocialProfile($social)
+    {
+        /* if($this->social()->exists()){
+            $this->social()->update($social);
+        }
+        else{
+            $this->social()->create($social);
+        } */
+        Social::updateOrCreate(
+            ['user_id' => $this->id],
+            $social
+        );
+    }
+
     // get the latest results
 /*     public function recentSocial()
     {

@@ -25,7 +25,9 @@ class UpdateSettingRequest extends FormRequest
     {
         return [
             'social.*' => 'nullable|url',
-
+            'options.disable_comments' => 'boolean',
+            'options.moderate_comments' => 'boolean',
+            'options.email_notification.*' => 'nullable'
 
         ];
     }

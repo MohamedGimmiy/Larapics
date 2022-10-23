@@ -12,7 +12,7 @@
                             is-invalid
                             @enderror"
                             value="{{old('user.username', $user->username)}}">
-                            @error('user.username') 
+                            @error('user.username')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -24,7 +24,7 @@
                             is-invalid
                             @enderror"
                             value="{{old('user.name', $user->name)}}">
-                            @error('user.name') 
+                            @error('user.name')
                             <div class="invalid-feedback">
                                 {{$message}}
                             </div>
@@ -32,13 +32,13 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="profile_image">Profile Image</label>
-                            <input type="file" name="user[profile_image]" id="profile_image" class="form-control 
+                            <input type="file" name="user[profile_image]" id="profile_image" class="form-control
                             @error('user.profile_image')
                             is-invalid
                             @enderror"
                             value="{{old('user.profile_image', $user->profile_image)}}">
 
-                            @error('user.profile_image') 
+                            @error('user.profile_image')
                             <div class="invalid-feedback">
                                 {{$message}}
                             </div>
@@ -53,7 +53,7 @@
                             is-invalid
                             @enderror"
                             value="{{old('user.city', $user->city)}}">
-                            @error('user.city') 
+                            @error('user.city')
                             <div class="invalid-feedback">
                                 {{$message}}
                             </div>
@@ -66,7 +66,7 @@
                             is-invalid
                             @enderror"
                             value="{{old('user.country', $user->country)}}">
-                            @error('user.country') 
+                            @error('user.country')
                             <div class="invalid-feedback">
                                 {{$message}}
                             </div>
@@ -78,7 +78,7 @@
                             is-invalid
                             @enderror"
                                 placeholder="In a few words, tell us about yourself">{{old('user.about_me', $user->about_me)}}"</textarea>
-                                @error('user.about_me') 
+                                @error('user.about_me')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
@@ -89,15 +89,33 @@
                         <legend>Account</legend>
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="account[email]" id="email" class="form-control">
+                            <input type="email" name="account[email]" id="email" class="form-control @error('account.email')
+                                is-invalid
+                            @enderror"
+                            value="{{old('account.email', $user->email)}}">
+
+                            @error('account.email')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Current Password</label>
-                            <input type="password" name="account[password]" id="password" class="form-control">
+                            <input type="password" name="account[password]" id="password" class="form-control @error('account.password')
+                            is-invalid
+                        @enderror">
+                        @error('account.password')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                         </div>
                         <div class="mb-3">
                             <label for="new_password" class="form-label">New Password</label>
-                            <input type="password" name="account[new_password]" id="new_password" class="form-control">
+                            <input type="password" name="account[new_password]" id="new_password" class="form-control
+                            @error('account.new_password')
+                            is-invalid
+                        @enderror">
+                        @error('account.new_password')
+                        <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
                         </div>
                         <div class="mb-3">
                             <label for="new_password_confirmation" class="form-label">New Password confirmation</label>
@@ -186,7 +204,7 @@
                             <div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="options[moderate_comments]"
-                                        id="moderate_comments_no" value="0" 
+                                        id="moderate_comments_no" value="0"
                                     @if (old('options.moderate_comments', $user->setting->moderate_comments)==0)
                                         checked
                                     @endif>

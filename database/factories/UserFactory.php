@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Faker\Provider\en_US\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
@@ -27,7 +28,7 @@ class UserFactory extends Factory
             'country' => rand(0,1) ===0 ? NULL : $this->faker->country(),
             'about_me' => rand(0,1) ===0 ? NULL : $this->faker->text(),
             'email_verified_at' => now(),
-            'password' => bcrypt('12345'), // password
+            'password' => Hash::make('12345'), // password
             'remember_token' => Str::random(10),
         ];
     }

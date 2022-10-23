@@ -34,7 +34,7 @@ class User extends Authenticatable
 
     // register an event after models initalization
     protected static function booted(){
-        
+
         static::created(function ($user) {
             $user->setting()->create([
                 'email_notification' => [
@@ -83,10 +83,26 @@ class User extends Authenticatable
     {
         return Storage::url($this->cover_image);
     }
+    public function inlineProfile()
+    {
+        return collect([
+            $this->name,
+            trim(join('/',[$this->city, $this->country]), '/'),
+            "Member since " . $this->created_at->toFormattedDateString(),
+            $this->getImagesCount()
+        ])->map(function ($name){
+            return ucfirst($name);
+        })->filter()->implode(".");
+    }
     public function hasCoverImage()
     {
         return !!$this->cover_image;
     }
+    public function url()
+    {
+        return route('author.show', $this->username);
+    }
+
     // get the latest results
 /*     public function recentSocial()
     {
